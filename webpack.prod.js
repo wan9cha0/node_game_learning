@@ -1,8 +1,8 @@
+// webpack.prod.js
 const {
   merge
 } = require('webpack-merge')
 const common = require('./webpack.common')
-
 // 压缩js的插件
 const TerserJSPlugin = require('terser-webpack-plugin')
 // 压缩css的插件

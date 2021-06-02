@@ -1,3 +1,4 @@
+// webpack.dev.js
 const {
   merge
 } = require('webpack-merge')

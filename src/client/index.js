@@ -1,18 +1,33 @@
-// src/servers/server.js
-const webpack = require('webpack')
-const webpackDevMiddleware = require('webpack-dev-middleware')
+import {
+  connect,
+  play
+} from "./networking"
+import {
+  $
+} from "./util"
+import './css/bootstrap-reboot.min.css'
+import './css/common.css'
+Promise.all([connect()]).then(() => {
 
-const webpackConfig = require('../../webpack.dev')
-// 前端静态文件
-const app = express();
-app.use(express.static('public'))
+  console.log('1231')
+  // 隐藏连接服务器显示输入框及按键
+  $('.connect').classList.add('hidden')
+  $('.play').classList.remove('hidden')
 
-if (process.env.NODE_ENV === 'development') {
-  // 这里是开发模式
-  // 这里使用了webpack-dev-middleware的中间件，作用就是代码改动就使用webpack.dev的配置进行打包文件
-  const compiler = webpack(webpackConfig);
-  app.use(webpackDevMiddleware(compiler));
-} else {
-  // 上线环境就只需要展示打包后的文件夹
-  app.use(express.static('dist'))
-}
+  // 默认聚焦输入框
+  $('#home input').focus()
+
+  // 游戏开始按钮监听点击时间
+
+  $('#play-button').onclick = () => {
+    let val = $('#home input').value
+    if (val.replace(/\s*/g, '') === '') {
+      alert('名称不能为空！')
+      return
+    }
+    // 游戏开始
+    $('#home').classList.add('hidden')
+    play(val)
+  }
+
+}).catch(console.error)

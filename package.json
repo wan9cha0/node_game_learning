@@ -21,7 +21,8 @@
   "homepage": "https://github.com/wan9cha0/node_game_learning#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "socket.io": "^4.1.2"
+    "socket.io": "^4.1.2",
+    "socket.io-client": "^4.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.14.3",

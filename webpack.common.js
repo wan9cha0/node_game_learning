@@ -1,46 +1,49 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const path = require('path')
+// webpack.common.js
+const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
-    game: './src/client/index.js'
+    game: './src/client/index.js',
   },
-  // 将打包文件输入到dist文件
+  // 将打包文件输出到dist文件夹
   output: {
     filename: '[name].[contenthash].js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
   },
   module: {
     rules: [
       // 使用babel解析js
       {
         test: /\.js$/,
-        exclude: /node_moules/,
+        exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
-            presets: ['@babel/preset-env']
-          }
-        }
+            presets: ['@babel/preset-env'],
+          },
+        },
       },
-      // 将js 中的css 抽出来
+      // 将js中的css抽出来
       {
         test: /\.css$/,
         use: [{
-          loader: MiniCssExtractPlugin.loader,
-        }, 'css-loader']
-      }
-    ]
+            loader: MiniCssExtractPlugin.loader,
+          },
+          'css-loader',
+        ],
+      },
+    ],
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].[contenthash].css'
+      filename: '[name].[contenthash].css',
     }),
-    // 将处理后的js 以及css 置于html 中
+    // 将处理后的js以及css置入html中
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: 'src/client/html/index.html'
-    })
-  ]
-}
+      template: 'src/client/html/index.html',
+    }),
+  ],
+};

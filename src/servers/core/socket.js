@@ -7,9 +7,13 @@ class Socket {
     this.io = io;
   }
 
-  listen() {
+  listen(socket) {
     // 玩家成功连接socket服务
-    console.log(`Player connected! Socket Id: ${socket.id}`)
+    console.log(`Player connected! Socket Id: ${Socket.id}`)
+    // 加入游戏
+    socket.on(Constants.MSG_TYPES.JOIN_GAME, this.game.joinGame.bind(this.game, socket));
+    // 断开游戏
+    socket.on('disconnect', this.game.disconnect.bind(this.game, socket));
   }
 }
 
