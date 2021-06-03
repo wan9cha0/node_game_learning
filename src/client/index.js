@@ -3,13 +3,15 @@ import {
   play
 } from "./networking"
 import {
+  downloadAssets
+} from './asset'
+import {
   $
 } from "./util"
 import './css/bootstrap-reboot.min.css'
 import './css/common.css'
-Promise.all([connect()]).then(() => {
+Promise.all([connect(), downloadAssets()]).then(() => {
 
-  console.log('1231')
   // 隐藏连接服务器显示输入框及按键
   $('.connect').classList.add('hidden')
   $('.play').classList.remove('hidden')
